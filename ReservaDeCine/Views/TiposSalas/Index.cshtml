@@ -1,0 +1,48 @@
+﻿@model IEnumerable<MVC.ReservaDeCine.Models.TipoSala>
+
+@{
+    ViewData["Title"] = "Tipos de sala";
+}
+
+<h1>Tipos de Sala</h1>
+
+<p>
+    <a asp-controller="TiposSalas" asp-action="Create">Crear nuevo tipo de sala</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrecioEntrada)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrecioEntrada)
+            </td>
+            <td>
+                <a asp-controller="TiposSalas" asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                <a asp-controller="TiposSalas" asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
+                <a asp-controller="TiposSalas" asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

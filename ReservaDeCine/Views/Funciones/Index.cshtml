@@ -1,0 +1,59 @@
+﻿@model IEnumerable<MVC.ReservaDeCine.Models.Funcion>
+
+@{
+    ViewData["Title"] = "Funciones";
+}
+
+<h1>Funciones</h1>
+
+<p>
+    <a asp-controller="Funciones" asp-action="Create">Crear nueva función</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SalaId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PeliculaId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaHora)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CantButacasDisponibles)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sala.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pelicula.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaHora)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CantButacasDisponibles)
+            </td>
+            <td>
+                <a asp-controller="Funciones" asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                <a asp-controller="Funciones" asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
+                <a asp-controller="Funciones" asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

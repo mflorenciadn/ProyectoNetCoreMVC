@@ -1,0 +1,65 @@
+﻿@model MVC.ReservaDeCine.Models.Pelicula
+
+@{
+    ViewData["Title"] = "Eliminar película";
+}
+
+<h1>Películas</h1>
+<h3>¿Está seguro que desea eliminar esta película?</h3>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Sinopsis)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Sinopsis)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Clasificacion)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Clasificacion.Descripcion)
+        </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Generos)
+        </dt>
+        <dd class="col-sm-10">
+            <ul>
+                @foreach (PeliculaGenero peliculaGeneros in Model.Generos)
+                {
+                    <li> @peliculaGeneros.Genero.Descripcion</li>
+                }
+            </ul>
+        </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Funciones)
+        </dt>
+        <dd class="col-sm-10">
+            <ul>
+                @foreach (Funcion funcion in Model.Funciones)
+                {
+                    <li> Sala: @funcion.Sala.Nombre,  Fecha de función: @funcion.Fecha.ToString("dd/MM/yyyy") a las @funcion.Fecha.ToString("hh:mm")</li>
+                }
+            </ul>
+        </dd>
+    </dl>
+
+    <form asp-controller="Peliculas" asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        <a asp-controller="Peliculas" asp-action="Index">Volver a la lista</a>
+    </form>
+
+</div>

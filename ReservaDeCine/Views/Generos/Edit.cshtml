@@ -1,0 +1,35 @@
+﻿@model MVC.ReservaDeCine.Models.Genero
+
+@{
+    ViewData["Title"] = "Editar género";
+}
+
+<h1>Géneros</h1>
+<h4>Editar géneros</h4>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Generos" asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Descripcion" class="control-label"></label>
+                <input asp-for="Descripcion"  minlength=4 maxlength=50 class="form-control" required/>
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-controller="Generos" asp-action="Index">Volver a la lista</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,62 @@
+﻿@{
+    ViewData["Title"] = "Página principal";
+}
+
+
+<div class="text-center">
+    <h1 style="font-size:50px">SuperSmart Cines</h1>
+</div>
+
+
+
+<div id="carouselInicio" class="carousel slide flex" data-ride="carousel" style="padding:0px">
+    <ol class="carousel-indicators">
+        <li data-slide-to="0" class="active"></li>
+        <li data-slide-to="1"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="~/lib/images/cine.jpg" width="1000" height="500" class="d-block w-100 flex">
+            <div class="carousel-caption d-none d-md-block">
+                <h2>El mejor cine de Argentina</h2>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <a asp-controller="Funciones" asp-action="SeleccionarFiltro">
+                <img src="~/lib/images/entradafutura.jpg" width="1000" height="500" class="d-block w-100 flex">
+            </a>
+            <div class="carousel-caption d-none d-md-block">
+                <h2>Quedate en casa</h2>
+                <h5>Reservá tu entrada futura</h5>
+            </div>
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselInicio" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselInicio" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+
+@section Scripts
+{
+
+    @if (ViewBag.PrimerLogin)
+    {
+        <script>
+            $.notify("¡Bienvenido @User.Identity.Name!", {
+                className: "success",
+                clickToHide: true,
+                position: "rigth bottom ",
+                showDuration: 1500
+            });
+        </script>
+    }
+
+
+
+}

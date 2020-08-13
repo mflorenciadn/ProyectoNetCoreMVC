@@ -1,0 +1,44 @@
+﻿@model MVC.ReservaDeCine.Models.Genero
+
+@{
+    ViewData["Title"] = "Detalle del género";
+}
+
+<h1>Géneros</h1>
+
+<div>
+    <h4>Detalles</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Peliculas)
+        </dt>
+        <dd class="col-sm-10">
+            <ul>
+                    @foreach (PeliculaGenero peliculaGeneros in Model.Peliculas)
+                    {
+                        <li> @peliculaGeneros.Pelicula.Nombre</li>
+                    }
+            </ul>
+        </dd>
+    </dl>
+</div>
+
+<div>
+    <a asp-controller="Generos" asp-action="Edit" asp-route-id="@Model.Id">Editar</a> |
+    <a asp-controller="Generos" asp-action="Index">Volver a la lista</a>
+</div>

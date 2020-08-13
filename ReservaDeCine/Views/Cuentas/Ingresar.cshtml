@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewData["Title"] = "Ingresar";
+}
+
+<div class="text-center">
+    <h2>Bienvenido</h2>
+</div>
+
+<hr/>
+
+<div class="login-container">
+   <div class="col-md-4 justify-content-center">
+        <form asp-controller="Cuentas" asp-action="Ingresar" method="post" >
+            <div class="container-content">
+                <div class="form-group">
+                    <label laber-for="username" class="control-label">Nombre de usuario:</label>
+                    <input name="username" class="form-control" type="text" value="@ViewBag.Username" required autofocus />
+                </div>
+                <div class="form-group">
+                    <label label-for="Password" class="control-label">Contraseña:</label>
+                    <input name="password" class="form-control" type="password" required autofocus />
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Ingresar" class="btn btn-primary btn-block" />
+                </div>
+                <div class="text-danger">
+                    @ViewBag.Error
+                </div>
+                <br/>
+                <p class="text-center">¿No tenés cuenta? Registrate</p>
+                <div class="form-group">
+                    <a class="btn btn-success btn-block" asp-controller="Clientes" asp-action="Registrar">Registrarme ahora</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

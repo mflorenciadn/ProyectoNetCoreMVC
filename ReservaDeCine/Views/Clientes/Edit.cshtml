@@ -1,0 +1,73 @@
+﻿@model MVC.ReservaDeCine.Models.Cliente
+
+@{
+    ViewData["Title"] = "Editar cliente";
+}
+
+<h1>Clientes</h1>
+<h4>Editar Cliente</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Clientes" asp-action="Edit" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Apellido" class="control-label"></label>
+                <input asp-for="Apellido" class="form-control" />
+                <span asp-validation-for="Apellido" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaDeNacimiento" class="control-label"></label>
+                <input asp-for="FechaDeNacimiento" type="date" class="form-control" />
+                <span asp-validation-for="FechaDeNacimiento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input name="password" type="password" class="form-control" id="pass" />
+                <span class="small">
+                    <input type="checkbox" onclick="verContrasenia()" /> Ver contraseña<br />
+                </span>
+                <span class="text-success small font-weight-bolder">
+                    La contraseña debe contener al menos 8 caracteres, un número, una minúscula y una mayúscula.
+                </span><br />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div>
+    <a asp-controller="Clientes" asp-action="Index">Volver a la lista</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+<script type="text/javascript">
+
+    function verContrasenia() {
+        var contrasenia = document.getElementById('pass');
+
+        if (contrasenia.type === "password") {
+            contrasenia.type = "text";
+        } else {
+            contrasenia.type = "password";
+        }
+    }
+</script>
+}

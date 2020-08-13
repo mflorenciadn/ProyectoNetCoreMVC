@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="icon" type="image" href="/lib/images/popcorn.png" />
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link href="~/lib/date-picker/css/bootstrap-datepicker3.css" rel="stylesheet" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
+              crossorigin="anonymous"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
+    </environment>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3 nav-tabs">
+            <div class="container">
+                <figure class="navbar-brand" style="padding-bottom:0px">
+                    <img src="~/lib/images/popcorn.png" width="35" height="40">
+                </figure>
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">Home</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <div class="navbar-nav flex-grow-1">
+
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+
+                            <ul class="navbar-nav flex-grow-1">
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" asp-controller="Peliculas" asp-action="Cartelera">Cartelera</a>
+                                </li>
+                            </ul>
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item">
+                                    <a class="btn btn-primary" asp-controller="Cuentas" asp-action="Ingresar">Ingresar</a>
+                                </li>
+                                <li class="nav-item ml-1">
+                                    <a class="btn btn-success" asp-controller="Clientes" asp-action="Registrar">Registrarse</a>
+                                </li>
+                            </ul>
+                        }
+                        else
+                        {
+                            @if (User.IsInRole(nameof(Role.Cliente)))
+                            {
+                                <ul class="navbar-nav flex-grow-1">
+                                    <li class="nav-item">
+                                        <a class="nav-link text-light" asp-controller="Peliculas" asp-action="Cartelera">Cartelera</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-light" asp-controller="Funciones" asp-action="SeleccionarFiltro">Reservar</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-light" asp-controller="Reservas" asp-action="MisReservas">Mis Reservas</a>
+                                    </li>
+                                </ul>
+                            }
+                            else
+                            {
+                                <ul class="navbar-nav flex-grow-1">
+                                    <li class="nav-item">
+                                        <a class="nav-link text-light" asp-controller="Funciones" asp-action="Index">Funciones</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-light" asp-controller="Generos" asp-action="Index">Géneros</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-light" asp-controller="Peliculas" asp-action="Index">Películas</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-light" asp-controller="Reservas" asp-action="Index">Reservas</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-light" asp-controller="Salas" asp-action="Index">Salas</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-light" asp-controller="Clientes" asp-action="Index">Clientes</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-light" asp-controller="TiposSalas" asp-action="Index">Tipos de Salas</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-light" asp-controller="Clasificaciones" asp-action="Index">Clasificaciones</a>
+                                    </li>
+                                </ul>
+                            }
+
+                            <ul class="navbar-nav mr-auto">
+                                <li>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            @User.Identity.Name
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            @if (User.IsInRole(nameof(Role.Cliente)))
+                                            {
+                                                <a class="dropdown-item" asp-controller="Clientes" asp-action="Details">Mis Datos</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" asp-controller="Clientes" asp-action="EditMe">Editar Perfil</a>
+                                            }
+                                            else
+                                            {
+                                                <a class="dropdown-item" asp-controller="Administradores" asp-action="Details">Mis Datos</a>
+                                            }
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="nav-item ml-1">
+                                    <form asp-action="Salir" asp-controller="Cuentas" method="post">
+                                        <button type="submit" class="btn btn-danger">Salir</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <partial name="_CookieConsentPartial" />
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="footer text-muted">
+        <div class="container">
+            &copy; 2020 - Reserva de cine -
+        </div>
+    </footer>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
+        </script>
+    </environment>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/notify/notify.js"></script>
+    <script src="~/lib/date-picker/js/bootstrap-datepicker.js"></script>
+    <script src="~/lib/date-picker/locales/bootstrap-datepicker.es.min.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

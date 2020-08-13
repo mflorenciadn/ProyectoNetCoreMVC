@@ -1,0 +1,86 @@
+﻿@model MVC.ReservaDeCine.Models.Reserva
+
+@{
+    ViewData["Title"] = "Crear reserva";
+}
+
+<h3>Crear reserva</h3>
+
+<hr/>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Reservas" asp-action="CrearReservaPorFuncion" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">Película</label><br>
+                <select disabled asp-items="@ViewBag.Peliculas" readonly></select>
+            </div>
+            <div class="form-group">
+                <input type="hidden" asp-for="FuncionId" />
+                <label class="control-label">Función</label><br>
+                <select disabled asp-items="@ViewBag.FechaHora"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="CantButacas" class="control-label"></label>
+                <input asp-for="CantButacas" type="number" class="form-control small" id="butacas" />
+                <span asp-validation-for="CantButacas" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal" id="botonModal" onclick="calcularTotal()">Reservar</button>
+                <div id="myModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content align-content-center">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Confirmar Reserva</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <span>Película: @Model.Funcion.Pelicula.Nombre</span><br>
+                                <span>Función: @Model.Funcion.FechaHora</span><br>
+                                <span>Costo total de la reserva: $</span><span id="totalCostoReserva"></span>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-outline-secondary">Confirmar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div>
+   <a asp-controller="Home" asp-action="Index">Volver al inicio</a>
+</div>
+
+
+@section Scripts
+{
+
+  @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript">
+
+        function calcularTotal() {
+            var butacas = document.getElementById('butacas').value;
+
+            if (butacas > 0 && butacas < 11) {
+                var total = parseInt(@ViewBag.CostoEntrada) * butacas;
+                document.getElementById('totalCostoReserva').innerText = total;
+            }
+            else
+            {
+                document.getElementById('totalCostoReserva').innerText= 'ERROR!'
+            }
+        }
+
+    </script>
+}
+
+

@@ -1,0 +1,67 @@
+﻿@model IEnumerable<MVC.ReservaDeCine.Models.Cliente>
+
+@{
+    ViewData["Title"] = "Clientes";
+}
+
+<h1>Clientes</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Username)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apellido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaDeNacimiento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaDeAlta)
+            </th>
+            <th></th>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apellido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @item.FechaDeNacimiento.ToString("dd/MM/yyyy")
+            </td>
+            <td>
+                @item.FechaDeAlta.ToString("dd/MM/yyyy")
+            </td>
+            <td>
+                <a asp-controller="Clientes" asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                <a asp-controller="Clientes" asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
+                <a asp-controller="Clientes" asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

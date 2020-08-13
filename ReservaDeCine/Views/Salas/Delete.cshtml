@@ -1,0 +1,58 @@
+﻿@model MVC.ReservaDeCine.Models.Sala
+
+@{
+    ViewData["Title"] = "Eliminar sala";
+}
+
+<h3>Salas</h3>
+<h3>¿Está seguro que desea eliminar esta sala?</h3>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Tipo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Tipo.Nombre)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CapacidadTotal)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CapacidadTotal)
+        </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Funciones)
+        </dt>
+        <dd class="col-sm-10">
+            @foreach (Funcion funcion in Model.Funciones)
+            {
+                <ul>
+                    <li>Película: @funcion.Pelicula.Nombre,  Fecha de función: @funcion.Fecha.ToString("dd/MM/yyyy") a las @funcion.Fecha.ToString("hh:mm")</li>
+                </ul>
+            }
+        </dd>
+    </dl>
+
+    <form asp-controller="Salas" asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Eliminar" class="btn btn-danger" />
+        <a asp-controller="Salas" asp-action="Index">Volver a la lista</a>
+    </form>
+
+</div>

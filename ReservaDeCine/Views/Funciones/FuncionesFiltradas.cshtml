@@ -1,0 +1,71 @@
+﻿@model IEnumerable<MVC.ReservaDeCine.Models.Funcion>
+
+@{
+    ViewData["Title"] = "Próximas funciones";
+}
+
+<h3>Próximas funciones</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Tipo de sala
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PeliculaId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaHora)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CantButacasDisponibles)
+            </th>
+            <th>
+                Precio
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sala.Tipo.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pelicula.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaHora)
+                </td>
+
+                @if (item.CantButacasDisponibles != 0)
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CantButacasDisponibles)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Sala.Tipo.PrecioEntrada)
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-secondary custom-select-sm" asp-controller="Reservas" asp-action="CrearReservaPorFuncion" asp-route-id="@item.Id">Reservar</a>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <p style="font-weight:bolder; color:red">Agotadas</p>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Sala.Tipo.PrecioEntrada)
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-secondary custom-select-sm disabled" disabled asp-controller="Reservas" asp-action="CrearReservaPorFuncion" asp-route-id="@item.Id">Reservar</a>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+

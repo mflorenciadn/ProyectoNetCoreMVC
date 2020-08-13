@@ -1,0 +1,44 @@
+﻿@model MVC.ReservaDeCine.Models.Funcion
+
+@{
+    ViewData["Title"] = "Eliminar función";
+}
+
+<h1>Funciones</h1>
+<h3>¿Está seguro que desea eliminar esta función?</h3>
+
+<div> 
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Sala)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Sala.Nombre)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pelicula)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pelicula.Nombre)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Fecha.ToString("dd/MM/yyyy")
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Horario)
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Horario.ToString("HH:mm")
+        </dd>
+    </dl>
+    
+    <form asp-controller="Funciones" asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        <a asp-controller="Funciones" asp-action="Index">Volver a la lista</a>
+    </form>
+</div>

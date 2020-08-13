@@ -1,0 +1,44 @@
+﻿@model MVC.ReservaDeCine.Models.Sala
+
+@{
+    ViewData["Title"] = "Crear sala";
+}
+
+<h1>Salas</h1>
+<h4>Crear nueva sala</h4> 
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Salas" asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre"  minlength=2 maxlength=50 class="form-control" required/>
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TipoId" class="control-label"></label>
+                <select asp-for="TipoId" class="form-control" asp-items="ViewBag.SelectTiposDeSala" required></select>
+                <span asp-validation-for="TipoId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CapacidadTotal" class="control-label"></label>
+                <input asp-for="CapacidadTotal" type="number" class="form-control" required/>
+                <span asp-validation-for="CapacidadTotal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Crear" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-controller="Salas" asp-action="Index">Volver a la lista</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

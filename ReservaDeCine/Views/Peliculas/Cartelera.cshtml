@@ -1,0 +1,44 @@
+﻿@model IEnumerable<MVC.ReservaDeCine.Models.Pelicula>
+
+@{
+    ViewData["Title"] = "Cartelera";
+}
+
+<p>
+   <a asp-controller="Funciones" asp-action="SeleccionarFiltro">Nueva reserva</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sinopsis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Clasificacion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sinopsis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Clasificacion.Descripcion)
+            </td>
+            <td>
+                <a class="btn btn-outline-secondary custom-select-sm text-center" asp-controller="Funciones" asp-action="FiltrarPorPelicula" asp-route-id="@item.Id">Funciones</a>
+            </td>
+          
+        </tr>
+}
+    </tbody>
+</table>

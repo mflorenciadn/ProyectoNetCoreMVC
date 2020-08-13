@@ -1,0 +1,63 @@
+﻿@model IEnumerable<MVC.ReservaDeCine.Models.Reserva>
+
+@{
+    ViewData["Title"] = "Reservas";
+}
+
+<h1>Reservas</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cliente)
+            </th>
+            <th>
+                Función
+            </th>
+            <th>
+                Butacas Reservadas
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CostoTotal)
+            </th>
+            
+            <th>
+                Sala
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cliente.Username)
+            </td>
+            <td>
+                @item.Funcion.Pelicula.Nombre,  @item.Funcion.FechaHora
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CantButacas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CostoTotal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Funcion.Sala.Nombre)
+            </td>
+
+            <td>
+                <a asp-controller="Reservas" asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
+                <a asp-controller="Reservas" asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

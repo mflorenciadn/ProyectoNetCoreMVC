@@ -1,0 +1,33 @@
+﻿@model MVC.ReservaDeCine.Models.Clasificacion
+
+@{
+    ViewData["Title"] = "Eliminar clasificación";
+}
+
+<h1>Clasificaciones</h1>
+<h3>¿Está seguro que desea eliminar esta clasificación?</h3>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EdadMinima)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EdadMinima)
+        </dd>
+    </dl>
+
+    <form asp-controller="Clasificaciones" asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        <a asp-controller="Clasificaciones" asp-action="Index">Volver a la lista</a>
+    </form>
+
+</div>
