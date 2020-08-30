@@ -1,4 +1,4 @@
-# ProyectoNetCoreMVC
+# Proyecto .NET Core MVC
 Aplicación web básica de reserva de cine
 
 - Arquitectura Cliente-Servidor
